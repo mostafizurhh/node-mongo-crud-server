@@ -32,6 +32,13 @@ async function run() {
             res.send(users);
         })
 
+        /* update specific user info */
+        app.get('/users/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const user = await userCollection.findOne(query);
+            res.send(user);
+        })
 
         /* receive data from client side and send to DB */
         app.post('/users', async (req, res) => {
